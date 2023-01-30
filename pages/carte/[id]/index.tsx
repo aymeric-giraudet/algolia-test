@@ -9,7 +9,8 @@ import {
 } from "react-instantsearch-hooks-web";
 import { renderToString } from "react-dom/server";
 import { ParsedUrlQuery } from "querystring";
-import { SelfCompo } from "../../../components/SelfCompo";
+import { LinkHome } from "../../../components/LinkHome";
+import { Card } from "../../../components/Card";
 
 interface CarteProps {
   serverState?: InstantSearchServerState;
@@ -40,8 +41,8 @@ const Carte = (props: CarteProps) => {
           }),
         }}
       >
-        <div>Hello World</div>
-        <SelfCompo id={props.id} />
+        <LinkHome />
+        <Card id={props.id} />
       </InstantSearch>
     </InstantSearchSSRProvider>
   );
@@ -54,8 +55,6 @@ export const getServerSideProps: GetServerSideProps<
   if (!context.query.id) {
     return { notFound: true };
   }
-
-  console.log("context", context.query.id);
 
   const protocol = context.req.headers.referer?.split("://")[0] || "https";
   const serverUrl = `${protocol}://${context.req.headers.host}${context.req.url}`;

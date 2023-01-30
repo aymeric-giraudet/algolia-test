@@ -8,6 +8,9 @@ interface HitModel {
 }
 
 export const HitCompo = (props: HitModel) => {
+  if (!props.hit) {
+    return null;
+  }
   return (
     <Link href={`/carte/${props.hit.objectID}`} passHref>
       <div className="card">
