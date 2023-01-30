@@ -1,16 +1,21 @@
 import algoliasearch from "algoliasearch";
-import { HeaderCompo } from "../components/SearchCompo";
-import { HitsList } from "../components/HitsList";
+import { createInstantSearchNextRouter } from "instantsearch-router-next-experimental";
+import { GetServerSideProps } from "next";
+import { getServerState } from "react-instantsearch-hooks-server";
 import {
   InstantSearch,
   InstantSearchServerState,
   InstantSearchSSRProvider,
 } from "react-instantsearch-hooks-web";
-import { createInstantSearchNextRouter } from "instantsearch-router-next-experimental";
-import { GetServerSideProps } from "next";
-import { ParsedUrlQuery } from "querystring";
-import { getServerState } from "react-instantsearch-hooks-server";
 import { renderToString } from "react-dom/server";
+import { ParsedUrlQuery } from "querystring";
+import { SelfCompo } from "../../../components/SelfCompo";
+
+interface CarteProps {
+  serverState?: InstantSearchServerState;
+  serverUrl: string;
+  id: string;
+}
 
 const connectionAlgolia = {
   testSandBox: ["latency", "6be0576ff61c053d5f9a3225e2a90f76"],
@@ -22,12 +27,7 @@ const searchClient = algoliasearch(
   connectionAlgolia.testSandBox[1]
 );
 
-interface HomeProps {
-  serverState?: InstantSearchServerState;
-  serverUrl: string;
-}
-
-const Home = (props: HomeProps) => {
+const Carte = (props: CarteProps) => {
   return (
     <InstantSearchSSRProvider {...props.serverState}>
       <InstantSearch
@@ -40,31 +40,39 @@ const Home = (props: HomeProps) => {
           }),
         }}
       >
-        <HeaderCompo />
-        <div className="body-content">
-          <HitsList />
-        </div>
+        <div>Hello World</div>
+        <SelfCompo id={props.id} />
       </InstantSearch>
     </InstantSearchSSRProvider>
   );
 };
 
 export const getServerSideProps: GetServerSideProps<
-  HomeProps,
+  CarteProps,
   ParsedUrlQuery
 > = async (context) => {
+  if (!context.query.id) {
+    return { notFound: true };
+  }
+
+  console.log("context", context.query.id);
+
   const protocol = context.req.headers.referer?.split("://")[0] || "https";
   const serverUrl = `${protocol}://${context.req.headers.host}${context.req.url}`;
-  const serverState = await getServerState(<Home serverUrl={serverUrl} />, {
-    renderToString,
-  });
+  const serverState = await getServerState(
+    <Carte serverUrl={serverUrl} id={context.query.id.toString()} />,
+    {
+      renderToString,
+    }
+  );
 
   return {
     props: {
       serverState: serverState,
       serverUrl: serverUrl,
+      id: context.query.id.toString(),
     },
   };
 };
 
-export default Home;
+export default Carte;

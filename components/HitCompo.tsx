@@ -1,20 +1,15 @@
 import Image from "next/image";
-import { Highlight } from "react-instantsearch-dom";
+import { BaseHit } from "instantsearch.js";
+import { useHits, UseHitsProps } from "react-instantsearch-hooks-web";
+import { Link } from "next-translate-routes";
 
 interface HitModel {
-  name: string;
-  rating: string;
-  image: string;
-  genre: string[];
+  hit: any;
 }
 
-interface HitCompoProps {
-  hit: HitModel;
-}
-
-export const HitCompo = (props: HitCompoProps) => {
+export const HitCompo = (props: HitModel) => {
   return (
-    <a href={"/"}>
+    <Link href={`/carte/${props.hit.objectID}`} passHref>
       <div className="card">
         <div className="card-image">
           <Image
@@ -26,14 +21,12 @@ export const HitCompo = (props: HitCompoProps) => {
           />
         </div>
         <div className="card-contents">
-          <Highlight attribute="title" hit={props.hit} className="card-title" />
-          <Highlight attribute="year" hit={props.hit} className="card-year" />
           <div className="card-rating">Rating: {props.hit.rating}</div>
           <div className="card-genre">
             <span>{props.hit.genre[0]}</span> <span>{props.hit.genre[1]}</span>
           </div>
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
