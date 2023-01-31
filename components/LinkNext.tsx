@@ -1,4 +1,4 @@
-import { Link } from "next-translate-routes";
+import { Link, useRouter } from "next-translate-routes";
 import { UrlObject } from "url";
 
 interface LinkNextProps {
@@ -8,7 +8,9 @@ interface LinkNextProps {
 }
 
 export const LinkNext = (props: LinkNextProps) => {
-  return props.url ? (
+  const router = useRouter();
+
+  return router && props.url ? (
     <Link href={props.url} passHref>
       <a onClick={props.onClick}>{props.children}</a>
     </Link>

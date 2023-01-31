@@ -2,6 +2,7 @@ import Image from "next/image";
 import { BaseHit } from "instantsearch.js";
 import { useHits, UseHitsProps } from "react-instantsearch-hooks-web";
 import { Link } from "next-translate-routes";
+import { LinkNext } from "./LinkNext";
 
 interface HitModel {
   hit: any;
@@ -12,7 +13,7 @@ export const HitCompo = (props: HitModel) => {
     return null;
   }
   return (
-    <Link href={`/carte/${props.hit.objectID}`} passHref>
+    <LinkNext url={`/carte/${props.hit.objectID}`}>
       <div className="card">
         <div className="card-image">
           <Image
@@ -30,6 +31,6 @@ export const HitCompo = (props: HitModel) => {
           </div>
         </div>
       </div>
-    </Link>
+    </LinkNext>
   );
 };

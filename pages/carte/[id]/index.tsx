@@ -11,6 +11,7 @@ import { renderToString } from "react-dom/server";
 import { ParsedUrlQuery } from "querystring";
 import { LinkHome } from "../../../components/LinkHome";
 import { Card } from "../../../components/Card";
+import singletonRouter from "next-translate-routes/router";
 
 interface CarteProps {
   serverState?: InstantSearchServerState;
@@ -38,6 +39,7 @@ const Carte = (props: CarteProps) => {
         routing={{
           router: createInstantSearchNextRouter({
             serverUrl: props.serverUrl,
+            singletonRouter,
           }),
         }}
       >

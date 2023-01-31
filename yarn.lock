@@ -1235,10 +1235,10 @@ inherits@2:
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
-instantsearch-router-next-experimental@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/instantsearch-router-next-experimental/-/instantsearch-router-next-experimental-0.0.5.tgz#a76cfb09a947291541f3bc1d772fb250d2fa0601"
-  integrity sha512-M8Et0jMTzGyeP2rKENyCIOwGzSLRYjob9umt1OR63A48bgZWHvGf13PdioUX+wcDoHfhVomH8m7DyrtCKlOUvQ==
+instantsearch-router-next-experimental@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/instantsearch-router-next-experimental/-/instantsearch-router-next-experimental-0.2.0.tgz#440a5c222a627417ec999f8513a1733f2cc12bb8"
+  integrity sha512-HQImvL6sM6hpV1gJiE1tnlVeM/F4YuE7qwOVG4qv2gyluhy/5ktnMwp6RhittUMKcx2LUC0qGo3cSHakgzIRKQ==
   dependencies:
     qs "^6.5.1 < 6.10"
 

@@ -11,6 +11,7 @@ import { GetServerSideProps } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { getServerState } from "react-instantsearch-hooks-server";
 import { renderToString } from "react-dom/server";
+import singletonRouter from "next-translate-routes/router";
 
 const connectionAlgolia = {
   testSandBox: ["latency", "6be0576ff61c053d5f9a3225e2a90f76"],
@@ -37,6 +38,7 @@ const Home = (props: HomeProps) => {
         routing={{
           router: createInstantSearchNextRouter({
             serverUrl: props.serverUrl,
+            singletonRouter,
           }),
         }}
       >

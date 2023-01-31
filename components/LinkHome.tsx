@@ -1,9 +1,10 @@
 import { Link } from "next-translate-routes";
+import { LinkNext } from "./LinkNext";
 
 export const LinkHome = () => {
   return (
-    <Link href="/">
+    <LinkNext url="/">
       <div>Accueil</div>
-    </Link>
+    </LinkNext>
   );
 };
